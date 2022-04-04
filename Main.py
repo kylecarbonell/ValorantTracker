@@ -7,8 +7,13 @@ soup = BeautifulSoup(text, "html.parser")
 stats = soup.find_all('div', class_ = 'numbers')
 
 #K/D Stat
-numbers = stats[1].find('span', class_="value").text
-print(f"K/D Ratio: {numbers}")
+
+
+for stat in stats:
+    numbers = stat.find('span', class_="value").text
+    titles = stat.find('span', class_="name").text
+    print(f"{titles}: {numbers}")
+    print('')
 # kd = stats.find_all('')
 
 
