@@ -11,22 +11,22 @@ path = Service('C:\Program Files (x86)\chromedriver.exe')
 browser = webdriver.Chrome(service=path)
 url = 'https://tracker.gg/valorant'
 browser.get(url)
-text = requests.get(url).text
 
 #Search Bar
-search = browser.find_elements(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/main/div[2]/div/div[1]/div/div/div[1]/div[2]/div[1]/form/input')
+search = browser.find_element(By.XPATH, '//*[@id="app"]/div[2]/div[2]/div/main/div[2]/div/div[1]/div/div/div[1]/div[2]/div[1]/form/input')
 search.send_keys('dazaichann#poopy')
 search.send_keys(Keys.RETURN)
 
 print(browser.page_source)
 time.sleep(50)
+browser.quit()
 
 #HTML Parser
-soup = BeautifulSoup(text, "html.parser")
-stats = soup.find_all('div', class_ = 'numbers')
+# soup = BeautifulSoup(text, "html.parser")
+# stats = soup.find_all('div', class_ = 'numbers')
 
 
-#Print stats
+# #Print stats
 # for stat in stats:
 #     numbers = stat.find('span', class_="value").text
 #     titles = stat.find('span', class_="name").text
