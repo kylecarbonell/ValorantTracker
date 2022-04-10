@@ -1,6 +1,7 @@
 from mimetypes import init
 from pickle import NONE
 from bs4 import BeautifulSoup
+import bs4
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
@@ -19,9 +20,9 @@ class Functions:
             "Most Kills (Match)" : 0
         }
 
-    def getUser(self):
-        #Request Player
-        user = input("Username and ID: ")
+    def getUser(self, user):
+        if(user.rfind("#") == -1):
+            return False
 
         #Create needed objects
         path = Service('C:\Program Files (x86)\chromedriver.exe')
@@ -40,6 +41,7 @@ class Functions:
 
         #HTML Parser
         soup = BeautifulSoup(text, "html.parser")
+        self.checkProf(soup)
         stats = soup.find_all('div', class_ = 'numbers')
         
         #Print stats
@@ -50,8 +52,15 @@ class Functions:
                 if i == titles:
                     self.dict[i] = numbers
 
+        return True
+
     def getStat(self, key):
         return key + ": " + self.dict[key]
+
+    def checkProf(bs4):
+        check = bs4.find_all('div', class_ = 'content content--error')
+        print(check.find('span', class_ = "lead").text)
+
 
 
 
