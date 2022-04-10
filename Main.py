@@ -10,7 +10,7 @@ import time
 
 class Functions:
     def __init__(self):
-        #Dictionary
+        #Dictionary for player stats
         self.dict = {
             "K/D Ratio" : 0,
             "Headshots" : 0,
@@ -21,7 +21,7 @@ class Functions:
         }
 
     def getUser(self, user):
-        if(user.rfind("#") == -1):
+        if('#' in user == False):
             return False
 
         #Create needed objects
@@ -36,15 +36,20 @@ class Functions:
         search.send_keys(Keys.RETURN)
         time.sleep(3)
 
+        #Saves browser source code
         text = browser.page_source
         browser.quit()
 
         #HTML Parser
         soup = BeautifulSoup(text, "html.parser")
-        self.checkProf(soup)
+
+        #Check if USER Exists
+        check = soup.find_all('div', class_ = 'content content--error')
+        if(len(check) != 0):
+            return False
+
+        #Puts stats into a dictionary
         stats = soup.find_all('div', class_ = 'numbers')
-        
-        #Print stats
         for stat in stats:
             numbers = stat.find('span', class_="value").text
             titles = stat.find('span', class_="name").text
@@ -55,14 +60,5 @@ class Functions:
         return True
 
     def getStat(self, key):
+        #Gets stat based on dictionary key
         return key + ": " + self.dict[key]
-
-    def checkProf(bs4):
-        check = bs4.find_all('div', class_ = 'content content--error')
-        print(check.find('span', class_ = "lead").text)
-
-
-
-
-#Bot: /kd dazaichann
-#self.dict["K/D Ratio"] = your KD

@@ -11,10 +11,11 @@ class Commands(commands.Cog):
     async def on_ready(self):
         print("Cog is ready")
 
+    #Sends KD Ratio
     @commands.command()
     async def kd(self,ctx, user):
-        if(self.stat.getUser(user=user)):
-            await ctx.send('self.stat.getStat("K/D Ratio")')
+        if(self.stat.getUser(user)):
+            await ctx.send(self.stat.getStat("K/D Ratio"))
         else:
             await ctx.send('User Not Found')
         
