@@ -59,6 +59,9 @@ class Functions:
 
         return True
 
-    def getStat(self, key):
+    def getStat(self, key, user):
         #Gets stat based on dictionary key
-        return key + ": " + self.dict[key]
+        if(self.getUser(user)):
+            return key + ": " + self.dict[key]
+        else:
+            return 'User Not Found!'
