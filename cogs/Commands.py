@@ -1,9 +1,8 @@
 from discord.ext import commands
-from discord import Embed, File
 from Main import Functions
+from discord import Embed
 
 class Commands(commands.Cog):
-    user = "hi"
     def __init__(self, client):
         self.stat = Functions()
         self.client = client
@@ -21,7 +20,7 @@ class Commands(commands.Cog):
     async def link(ctx, getUser):
         link = getUser
         await ctx.send("ballz")
-        
+
     @commands.command()
     async def hs(self,ctx, user):
         await ctx.send(self.stat.getStat("Headshots", user))
@@ -41,6 +40,12 @@ class Commands(commands.Cog):
     @commands.command()
     async def hikills(self,ctx, user):
         await ctx.send(self.stat.getStat("Most Kills (Match)", user))
+
+    @commands.command()
+    async def all(self,ctx):
+        embed = Embed()
+        embed.title = "Statistics"
+        await ctx.send(embed)
 
 
     
