@@ -2,6 +2,7 @@ import discord
 import os
 import random
 from discord.ext import commands
+from cogs import Commands
 
 
 client  = commands.Bot('/')
