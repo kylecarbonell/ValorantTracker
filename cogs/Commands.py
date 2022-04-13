@@ -42,10 +42,9 @@ class Commands(commands.Cog):
         await ctx.send(self.stat.getStat("Most Kills (Match)", user))
 
     @commands.command()
-    async def all(self,ctx):
-        embed = Embed()
-        embed.title = "Statistics"
-        await ctx.send(embed)
+    async def all(self,ctx, user):
+        embed = self.stat.getAll(user)
+        await ctx.send(embed = embed)
 
 
     

@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from discord import Embed
 import time
 
 class Functions:
@@ -19,6 +20,8 @@ class Functions:
             "Aces" : 0,
             "Most Kills (Match)" : 0
         }
+
+        self.pic = ""
 
     def getUser(self, user):
         if('#' in user == False):
@@ -50,6 +53,8 @@ class Functions:
 
         #Puts stats into a dictionary
         stats = soup.find_all('div', class_ = 'numbers')
+        self.pic = soup.find_all('image', href = True)[0]
+        print(self.pic)
         for stat in stats:
             numbers = stat.find('span', class_="value").text
             titles = stat.find('span', class_="name").text
@@ -65,3 +70,14 @@ class Functions:
             return key + ": " + self.dict[key]
         else:
             return 'User Not Found!'
+
+    def getAll(self, user):
+        self.getUser(user)
+        embed = Embed()
+        embed.title = user.split("#")[0].capitalize() + " Stats"
+        for i in self.dict:
+            embed.add_field(name=i, value=self.dict[i], inline=True)
+
+        embed.thumbnail = self.pic
+
+        return embed
