@@ -26,6 +26,7 @@ class Functions:
         with open("Users.json") as f:
             self.file = json.load(f)
 
+
     def getUser(self, user):
         if('#' in user == False):
             return False
@@ -62,6 +63,7 @@ class Functions:
             self.pic = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.cults3d.com%2F4QqRV9kLYYEuw9ur_X3yjQl1sjk%3D%2F516x516%2Fhttps%3A%2F%2Ffiles.cults3d.com%2Fuploaders%2F15024335%2Fillustration-file%2Fa86d53e4-2bd9-4a8f-9550-986686c3131a%2Fgi0mAjIh_400x400.png&imgrefurl=https%3A%2F%2Fcults3d.com%2Fen%2F3d-model%2Fart%2Fvalorant-logo&tbnid=NtlHGJwaaD6E5M&vet=12ahUKEwiW3NTs_5P3AhWgHjQIHXYNDsUQMygDegUIARDEAQ..i&docid=PNy45xM50WJHYM&w=516&h=516&q=valorant%20logo&ved=2ahUKEwiW3NTs_5P3AhWgHjQIHXYNDsUQMygDegUIARDEAQ"
         else:
             self.pic = soup.find_all('image', href = True)[0]['href']
+
         for stat in stats:
             numbers = stat.find('span', class_="value").text
             titles = stat.find('span', class_="name").text
@@ -111,3 +113,13 @@ class Functions:
                 return i['valorantID']
 
         return None
+
+        self.getUser(user)
+        embed = Embed()
+        embed.title = user.split("#")[0].capitalize() + " Stats"
+        for i in self.dict:
+            embed.add_field(name=i, value=self.dict[i], inline=True)
+
+        embed.thumbnail = self.pic
+
+        return embed

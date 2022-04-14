@@ -2,6 +2,7 @@ from discord.ext import commands
 from discord import Embed
 from Main import Functions
 
+
 class Commands(commands.Cog):
     def __init__(self, client):
         self.stat = Functions()
@@ -84,6 +85,7 @@ class Commands(commands.Cog):
             await ctx.send(str(ctx.message.author) + " has connected to " + user)
         else:
             await ctx.send(str(ctx.message.author) + " is already connected to a different user")
+
     
 def setup(client):
     client.add_cog(Commands(client))
