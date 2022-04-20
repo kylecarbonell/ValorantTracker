@@ -4,3 +4,4 @@ How to use:
 1) Clone repository and open with IDE of your choice.  
 2) Install bs4, discord and discord.ext from command prompt.
 3) Run bot.py and command.py.
+4) Invite bot into discord server.
